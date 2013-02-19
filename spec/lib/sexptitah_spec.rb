@@ -9,54 +9,84 @@ describe '#to_sexp method' do
   end
 end
 
+describe NilClass do
+  it "should include Enumerable" do
+    NilClass.should include(Enumerable)
+  end
+  it "should include ConsMixin" do
+    NilClass.should include(ConsMixin)
+  end
+end
+
 describe Cons do
   before(:each) do
     @cons = Cons.new 1, nil
   end
-  it "should have a 'chain' class method." do
-    Cons.should respond_to(:chain)
-  end
 
-  describe 'Cons@chain' do
-    it "should create a Cons chain with correct car and cdr" do
-      @chain = Cons.chain(1,2,nil)
-      @chain.should == Cons[1,Cons[2, nil]]
-      @chain = Cons.chain(1,2,3,4)
-      @chain.should == Cons[1,Cons[2,Cons[3, 4]]]
+  describe 'Mixins' do
+    it "should include ConsMixin" do
+      Cons.should include(ConsMixin)
+    end
+    it "should be Enumerable" do
+      Cons.should include(Enumerable)
+    end
+  end
+  describe 'Class Methods' do
+    describe 'Cons.chain' do
+      it "should have a 'chain' class method." do
+        Cons.should respond_to(:chain)
+      end
+      it "should create a Cons chain with correct car and cdr" do
+        chain = Cons.chain(1,2,nil)
+        chain.should == Cons[1,Cons[2, nil]]
+        chain = Cons.chain(1,2,3,4)
+        chain.should == Cons[1,Cons[2,Cons[3, 4]]]
+      end
+    end
+
+    describe "Cons.list" do
+      it "should have a 'list' class method." do
+        Cons.should respond_to(:list)
+      end
+
+      it "should correctly create a proper list." do
+        proper_list = Cons.list(1, 2, 3, 4)
+        proper_list.should == Cons[1, Cons[2, Cons[3, Cons[4, nil]]]]
+      end
+    end
+
+    it "should have a [] class method." do
+      Cons.should respond_to(:'[]')
     end
   end
 
-  it "should have a 'list' class method." do
-    Cons.should respond_to(:list)
-  end
+  describe "Instance Methods" do
+    it "should have a 'car' method." do
+      @cons.should respond_to(:car)
+    end
 
-  it "should correctly create a proper list." do
-    proper_list = Cons.list(1, 2, 3, 4)
-    proper_list.should == Cons[1, Cons[2, Cons[3, Cons[4, nil]]]]
-  end
+    it "should have a 'cdr' method." do
+      @cons.should respond_to(:cdr)
+    end
 
-  describe
-  it "should have a 'car' method." do
-    @cons.should respond_to(:car)
-  end
+    it "should have [] instance method." do
+      @cons.should respond_to(:'[]')
+    end
 
-  it "should have a 'cdr' method." do
-    @cons.should respond_to(:cdr)
-  end
+    describe "Cons#[]" do
+      it "list[n] should return the nth element." do
+        a = [1, 2, 3, 4, 5, 6]
+        l = Cons.list(*a)
+        a.each_with_index { |el, idx| l[idx].should == el }
+      end
+    end
 
-  it "should have a [] class method." do
-    Cons.should respond_to(:'[]')
-  end
+    it "should have a 'each' method" do
+      @cons.should respond_to(:each)
+    end
 
-  it "should have [] instance method." do
-    @cons.should respond_to(:'[]')
-  end
-
-  describe "Cons#[]" do
-    it "list[n] should return the nth element." do
-      a = [1, 2, 3, 4, 5, 6]
-      l = Cons.list(*a)
-      a.each_with_index { |el, idx| l[idx].should == el }
+    it "should have a mapl method" do
+      @cons.should respond_to(:mapl)
     end
   end
 end
