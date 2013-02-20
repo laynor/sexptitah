@@ -27,3 +27,7 @@ task :test    => :spec
 task :default => :spec
 
 require "bundler/gem_tasks"
+
+task(:benchmark) do
+  ruby 'benchmark/list_bm.rb'
+end
