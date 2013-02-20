@@ -1,6 +1,6 @@
 # -*- ruby -*-
 @runner = Spectator::ERunner.new(:report_buffer_mode => "org") do |runner|
   def runner.extract_rspec_summary(output)
-    extract_rspec_stats output, -6
+    extract_rspec_stats output, -7
   end
 end

@@ -142,12 +142,12 @@ class Cons
     s = '('
     p = self
     while Cons === p.cdr
-      s << p.car.to_s + " "
+      s << p.car.send(Cons === p.car ? :to_s : :inspect) + " "
       p = p.cdr
     end
-    s << p.car.to_s
+    s << p.car.send(Cons === p.car ? :to_s : :inspect)
     if p.cdr != nil
-      s << " . #{p.cdr}"
+      s << " . #{p.cdr.inspect}"
     end
     s << ')'
   end
