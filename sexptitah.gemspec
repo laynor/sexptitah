@@ -5,8 +5,8 @@ require File.expand_path('../lib/sexptitah/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name          = "sexptitah"
   gem.version       = Sexptitah::VERSION
-  gem.summary       = %q{TODO: Summary}
-  gem.description   = %q{TODO: Description}
+  gem.summary       = %q{sexp parser/formatter}
+  gem.description   = %q{Sexptitah is a sexp parser/formatter}
   gem.license       = "MIT"
   gem.authors       = ["Alessandro Piras"]
   gem.email         = "laynor@gmail.com"

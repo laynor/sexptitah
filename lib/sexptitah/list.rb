@@ -108,7 +108,7 @@ class Cons
   end
 
   def ==(other_cons)
-    other_cons.car == @car && other_cons.cdr == @cdr
+    Cons === other_cons && other_cons.car == @car && other_cons.cdr == @cdr
   end
 
   def [](n)
@@ -166,4 +166,5 @@ class Cons
       p = p.cdr
     end
   end
+
 end
