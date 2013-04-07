@@ -4,4 +4,4 @@ vendor/cache/*.gem
 *~
 \#*#
 .#*
-/coverage
+coverage
